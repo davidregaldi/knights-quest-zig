@@ -20,19 +20,22 @@ pub fn main() !void {
     var p1 = Player.init(.{ .name = "Eidknab", .level = 1, .class = Player.Class.Knight });
     p1.levelUp();
 
-    // try stdout.print("\nPress Enter to continue...", .{});
-    // try stdout.flush();
     // _ = try reader.discardDelimiterInclusive('\n');
-
-    try stdout.print("\nType 'start' or 'quit': ", .{});
-    try stdout.flush();
-    const userInput = try reader.takeDelimiter('\n') orelse "";
-    if (std.mem.eql(u8, userInput, "start")) {
-        try stdout.print("Starting game...\n", .{});
-    } else if (std.mem.eql(u8, userInput, "quit")) {
-        try stdout.print("Quitting game.\n", .{});
-    } else {
-        try stdout.print("Invalid input.", .{});
+    while (true) {
+        try stdout.print("\nType 'start' or 'quit': ", .{});
+        try stdout.flush();
+        const userInput = try reader.takeDelimiter('\n') orelse "";
+        if (std.mem.eql(u8, userInput, "start")) {
+            try stdout.print("Starting game...\n", .{});
+            try stdout.flush();
+            break;
+        } else if (std.mem.eql(u8, userInput, "quit")) {
+            try stdout.print("Quitting game.\n", .{});
+            try stdout.flush();
+            return;
+        } else {
+            try stdout.print("Invalid input.", .{});
+            try stdout.flush();
+        }
     }
-    try stdout.flush();
 }
