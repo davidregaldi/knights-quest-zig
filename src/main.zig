@@ -2,12 +2,37 @@ const std = @import("std");
 const Player = @import("entities/player.zig").Player;
 const cls = @import("utils/colors.zig");
 
-pub fn main() void {
-    std.debug.print("{s}\n", .{cls.clear});
-    std.debug.print("-\n{s}{s}{s}Welcome to Knight's Quest!{s}\n-\n", .{ cls.bold, cls.underline, cls.yellow, cls.reset });
-    // var p1 = Player.init(.{});
-    var p2 = Player.init(.{ .name = "Staïss", .level = 10, .class = Player.Class.Sorcerer });
-    // var p3 = Player.init(.{ .name = "Zëss", .level = 1, .class = Player.Class.Sorcerer });
+pub fn main() !void {
 
-    p2.levelUp();
+    // init buffers
+    var stdin_buffer: [4096]u8 = undefined;
+    var stdin_reader = std.fs.File.stdin().reader(&stdin_buffer);
+    const reader = &stdin_reader.interface;
+
+    var stdout_buffer: [4096]u8 = undefined;
+    var stdout_writer = std.fs.File.stdout().writer(&stdout_buffer);
+    const stdout = &stdout_writer.interface;
+
+    try stdout.print("{s}", .{cls.clear});
+    try stdout.print("-\n{s}{s}{s}Welcome to Knight's Quest!{s}\n-\n", .{ cls.bold, cls.underline, cls.yellow, cls.reset });
+    try stdout.flush();
+
+    var p1 = Player.init(.{ .name = "Eidknab", .level = 1, .class = Player.Class.Knight });
+    p1.levelUp();
+
+    // try stdout.print("\nPress Enter to continue...", .{});
+    // try stdout.flush();
+    // _ = try reader.discardDelimiterInclusive('\n');
+
+    try stdout.print("\nType 'start' or 'quit': ", .{});
+    try stdout.flush();
+    const userInput = try reader.takeDelimiter('\n') orelse "";
+    if (std.mem.eql(u8, userInput, "start")) {
+        try stdout.print("Starting game...\n", .{});
+    } else if (std.mem.eql(u8, userInput, "quit")) {
+        try stdout.print("Quitting game.\n", .{});
+    } else {
+        try stdout.print("Invalid input.", .{});
+    }
+    try stdout.flush();
 }
