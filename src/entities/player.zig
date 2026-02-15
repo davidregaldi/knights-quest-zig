@@ -2,11 +2,16 @@ const std = @import("std");
 const Item = @import("item.zig").Item;
 const itemsDB = @import("../data/items-db.zig");
 
+pub const Position = struct {
+    x: i16 = 0,
+    y: i16 = 0,
+};
+
 pub const Player = struct {
     name: []const u8,
     level: u16,
     class: Class,
-    gold: u16 = 100,
+    position: Position = .{},
 
     // Equipment slots
     head: Item = itemsDB.emptyHead,
@@ -21,6 +26,7 @@ pub const Player = struct {
     amulet: Item = itemsDB.emptyAmulet,
     unlockedSlots: u8,
     inventory: [16]Item = [_]Item{itemsDB.emptyItem} ** 16,
+    gold: u16 = 100,
 
     // Base Attributes
     baseStrength: u16,
@@ -123,6 +129,8 @@ pub const Player = struct {
         player.updateStats();
         player.resetLifeAndMana();
         std.debug.print("{s} entered the game.\nLevel {d} {s}\n", .{ player.name, player.level, @tagName(player.class) });
+        std.debug.print("-\n", .{});
+        player.printPosition();
         player.printStats();
         player.printEquiped();
         player.printInventory();
@@ -170,6 +178,11 @@ pub const Player = struct {
         }
         std.debug.print("\nSlots: {d}/{d}\n", .{ slotLeft, self.unlockedSlots });
         std.debug.print("Gold: {d}\n", .{self.gold});
+        std.debug.print("-\n", .{});
+    }
+
+    pub fn printPosition(self: *Player) void {
+        std.debug.print("x: {d} y: {d}\n", .{ self.position.x, self.position.y });
         std.debug.print("-\n", .{});
     }
 

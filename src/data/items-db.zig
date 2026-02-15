@@ -61,13 +61,13 @@ pub const smallBook = Item{
 
 // potions
 pub const smallHealthPotion = Item{
-    .name = "Health Potion",
+    .name = "Small Health Potion",
     .itemType = .potion,
     .health = 40,
 };
 
 pub const smallManaPotion = Item{
-    .name = "Mana Potion",
+    .name = "Small Mana Potion",
     .itemType = .potion,
     .mana = 40,
 };
