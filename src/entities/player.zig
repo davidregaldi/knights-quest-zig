@@ -19,6 +19,8 @@ pub const Player = struct {
     ringLeft: Item = itemsDB.emptyRingLeft,
     ringRight: Item = itemsDB.emptyRingRight,
     amulet: Item = itemsDB.emptyAmulet,
+    unlockedSlots: u8,
+    inventory: [16]Item = [_]Item{itemsDB.emptyItem} ** 16,
 
     // Base Attributes
     baseStrength: u16,
@@ -99,6 +101,11 @@ pub const Player = struct {
                 .Rogue => 55,
                 .Sorcerer => 45,
             },
+            .unlockedSlots = switch (options.class) {
+                .Knight => 12,
+                .Rogue => 10,
+                .Sorcerer => 8,
+            },
             .mainHand = switch (options.class) {
                 .Knight => itemsDB.shortSword,
                 .Rogue => itemsDB.shortBow,
@@ -110,6 +117,9 @@ pub const Player = struct {
                 .Sorcerer => itemsDB.smallBook,
             },
         };
+        player.inventory[0] = itemsDB.smallHealthPotion;
+        player.inventory[1] = itemsDB.smallManaPotion;
+
         player.updateStats();
         player.resetLifeAndMana();
         std.debug.print("{s} entered the game.\nLevel {d} {s}\n", .{ player.name, player.level, @tagName(player.class) });
@@ -148,7 +158,17 @@ pub const Player = struct {
     }
 
     pub fn printInventory(self: *Player) void {
-        std.debug.print("Inventory: \n", .{});
+        std.debug.print("Inventory: ", .{});
+        var slotLeft = self.unlockedSlots;
+        for (self.inventory) |item| {
+            if (std.mem.eql(u8, item.name, "Empty")) {
+                continue;
+            } else {
+                slotLeft -= 1;
+                std.debug.print("{s}, ", .{item.name});
+            }
+        }
+        std.debug.print("\nSlots: {d}/{d}\n", .{ slotLeft, self.unlockedSlots });
         std.debug.print("Gold: {d}\n", .{self.gold});
         std.debug.print("-\n", .{});
     }

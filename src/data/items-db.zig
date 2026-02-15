@@ -11,6 +11,7 @@ pub const emptyBoots = Item{ .name = "Empty", .itemType = .boots };
 pub const emptyRingLeft = Item{ .name = "Empty", .itemType = .ringLeft };
 pub const emptyRingRight = Item{ .name = "Empty", .itemType = .ringRight };
 pub const emptyAmulet = Item{ .name = "Empty", .itemType = .amulet };
+pub const emptyItem = Item{ .name = "Empty", .itemType = .head }; // for inventory
 
 // Objets du jeu
 
@@ -56,4 +57,17 @@ pub const smallBook = Item{
     .name = "Small Book",
     .itemType = .offHand,
     .magic = 1,
+};
+
+// potions
+pub const smallHealthPotion = Item{
+    .name = "Health Potion",
+    .itemType = .potion,
+    .health = 40,
+};
+
+pub const smallManaPotion = Item{
+    .name = "Mana Potion",
+    .itemType = .potion,
+    .mana = 40,
 };

@@ -17,7 +17,7 @@ pub const Item = struct {
     health: u16 = 0,
     mana: u16 = 0,
 
-    pub const ItemType = enum { head, body, mainHand, offHand, gloves, belt, boots, ringLeft, ringRight, amulet };
+    pub const ItemType = enum { head, body, mainHand, offHand, gloves, belt, boots, ringLeft, ringRight, amulet, potion };
 
     pub fn init(name: []const u8, itemType: ItemType) Item {
         return Item{
