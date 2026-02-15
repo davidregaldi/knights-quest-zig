@@ -71,3 +71,27 @@ pub const smallManaPotion = Item{
     .itemType = .potion,
     .mana = 40,
 };
+
+pub const strengthElixir = Item{
+    .name = "Elixir Of Strength",
+    .itemType = .potion,
+    .strength = 1,
+};
+
+pub const dexerityElixir = Item{
+    .name = "Elixir Of Dexterity",
+    .itemType = .potion,
+    .dexterity = 1,
+};
+
+pub const vitalityElixir = Item{
+    .name = "Elixir Of Vitality",
+    .itemType = .potion,
+    .vitality = 1,
+};
+
+pub const magicElixir = Item{
+    .name = "Elixir Of Magic",
+    .itemType = .potion,
+    .magic = 1,
+};
