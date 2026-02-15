@@ -1,9 +1,24 @@
 const std = @import("std");
+const Item = @import("item.zig").Item;
+const itemsDB = @import("../data/items-db.zig");
 
 pub const Player = struct {
     name: []const u8,
     level: u16,
     class: Class,
+    gold: u16 = 100,
+
+    // Equipment slots
+    head: Item = itemsDB.emptyHead,
+    body: Item = itemsDB.emptyBody,
+    mainHand: Item = itemsDB.emptyMainHand,
+    offHand: Item = itemsDB.emptyOffHand,
+    gloves: Item = itemsDB.emptyGloves,
+    belt: Item = itemsDB.emptyBelt,
+    boots: Item = itemsDB.emptyBoots,
+    ringLeft: Item = itemsDB.emptyRingLeft,
+    ringRight: Item = itemsDB.emptyRingRight,
+    amulet: Item = itemsDB.emptyAmulet,
 
     // Base Attributes
     baseStrength: u16,
@@ -84,11 +99,23 @@ pub const Player = struct {
                 .Rogue => 55,
                 .Sorcerer => 45,
             },
+            .mainHand = switch (options.class) {
+                .Knight => itemsDB.shortSword,
+                .Rogue => itemsDB.shortBow,
+                .Sorcerer => itemsDB.dagger,
+            },
+            .offHand = switch (options.class) {
+                .Knight => itemsDB.buckler,
+                .Rogue => itemsDB.basicArrow,
+                .Sorcerer => itemsDB.smallBook,
+            },
         };
         player.updateStats();
         player.resetLifeAndMana();
         std.debug.print("{s} entered the game.\nLevel {d} {s}\n", .{ player.name, player.level, @tagName(player.class) });
         player.printStats();
+        player.printEquiped();
+        player.printInventory();
         return player;
     }
 
@@ -103,6 +130,27 @@ pub const Player = struct {
             std.debug.print("-\n", .{});
             self.resetLifeAndMana();
         }
+    }
+
+    pub fn printEquiped(self: *Player) void {
+        std.debug.print("Equipment: \n", .{});
+        std.debug.print("Head: {s}\n", .{self.head.name});
+        std.debug.print("Body: {s}\n", .{self.body.name});
+        std.debug.print("Main Hand: {s}\n", .{self.mainHand.name});
+        std.debug.print("Off Hand: {s}\n", .{self.offHand.name});
+        std.debug.print("Gloves: {s}\n", .{self.gloves.name});
+        std.debug.print("Belt: {s}\n", .{self.belt.name});
+        std.debug.print("Boots: {s}\n", .{self.boots.name});
+        std.debug.print("Ring Left: {s}\n", .{self.ringLeft.name});
+        std.debug.print("Ring Right: {s}\n", .{self.ringRight.name});
+        std.debug.print("Amulet: {s}\n", .{self.amulet.name});
+        std.debug.print("-\n", .{});
+    }
+
+    pub fn printInventory(self: *Player) void {
+        std.debug.print("Inventory: \n", .{});
+        std.debug.print("Gold: {d}\n", .{self.gold});
+        std.debug.print("-\n", .{});
     }
 
     pub fn printStats(self: *Player) void {
@@ -120,6 +168,34 @@ pub const Player = struct {
     }
 
     pub fn updateStats(self: *Player) void {
+        const equipment = [_]Item{
+            self.head,      self.body,   self.mainHand, self.offHand,
+            self.gloves,    self.belt,   self.boots,    self.ringLeft,
+            self.ringRight, self.amulet,
+        };
+
+        self.bonusStrength = 0;
+        self.bonusDexterity = 0;
+        self.bonusVitality = 0;
+        self.bonusMagic = 0;
+        self.bonusArmor = 0;
+        self.bonusCritical = 0;
+        self.bonusHit = 0;
+        self.bonusHealthMax = 0;
+        self.bonusManaMax = 0;
+
+        for (equipment) |item| {
+            self.bonusStrength += item.strength;
+            self.bonusDexterity += item.dexterity;
+            self.bonusVitality += item.vitality;
+            self.bonusMagic += item.magic;
+            self.bonusArmor += item.armor;
+            self.bonusCritical += item.critical;
+            self.bonusHit += item.hit;
+            self.bonusHealthMax += item.health;
+            self.bonusManaMax += item.mana;
+        }
+
         self.baseHealthMax = switch (self.class) {
             .Knight => self.baseVitality * 2 + self.level * 2 + 20,
             .Rogue => self.baseVitality * 3 / 2 + self.level * 2 + 15,
@@ -132,8 +208,8 @@ pub const Player = struct {
         };
 
         // Gauss quadratic formula (max level 50)
-        self.experienceMax = @intCast((@as(u32, 65535) * @as(u32, self.level + 1) * (self.level + 1)) / (51*51));
-        
+        self.experienceMax = @intCast((@as(u32, 65535) * @as(u32, self.level + 1) * (self.level + 1)) / (51 * 51));
+
         // Final stats calculation
         self.finalStrength = self.baseStrength + self.bonusStrength;
         self.finalDexterity = self.baseDexterity + self.bonusDexterity;
