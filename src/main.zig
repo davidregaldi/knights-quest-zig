@@ -22,7 +22,7 @@ pub fn main() !void {
 
     // _ = try reader.discardDelimiterInclusive('\n');
     while (true) {
-        try stdout.print("\nType 'start' or 'quit': ", .{});
+        try stdout.print("\nType {s}'start'{s} or {s}'quit'{s}: ", .{ cls.bold, cls.reset, cls.bold, cls.reset });
         try stdout.flush();
         const userInput = try reader.takeDelimiter('\n') orelse "";
         if (std.mem.eql(u8, userInput, "start")) {
