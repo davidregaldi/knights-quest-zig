@@ -80,6 +80,40 @@ pub const smallBook = Item{
     .price = 15,
 };
 
+// Boots
+pub const raggedBoots = Item{
+    .name = "Ragged Boots",
+    .itemType = .boots,
+    .armor = 2,
+    .price = 15,
+};
+
+pub const heavyBoots = Item{
+    .name = "Heavy Boots",
+    .itemType = .boots,
+    .armor = 6,
+    .vitality = 2,
+    .price = 55,
+};
+
+pub const swiftBoots = Item{
+    .name = "Swift Boots",
+    .itemType = .boots,
+    .armor = 4,
+    .dexterity = 2,
+    .hit = 5,
+    .price = 60,
+};
+
+pub const spiritBoots = Item{
+    .name = "Spirit Boots",
+    .itemType = .boots,
+    .armor = 3,
+    .magic = 1,
+    .mana = 20,
+    .price = 75,
+};
+
 // potions
 pub const smallHealthPotion = Item{
     .name = "Small Health Potion",
