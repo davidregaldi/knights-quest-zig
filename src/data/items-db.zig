@@ -15,6 +15,21 @@ pub const emptyItem = Item{ .name = "Empty", .itemType = .head }; // for invento
 
 // Objets du jeu
 
+// head
+pub const cap = Item{
+    .name = "Cap",
+    .itemType = .head,
+    .armor = 2,
+    .price = 10,
+};
+
+pub const skullCap = Item{
+    .name = "Skull Cap",
+    .itemType = .head,
+    .armor = 4,
+    .price = 25,
+};
+
 // mainHand
 pub const dagger = Item{
     .name = "Dagger",
@@ -22,6 +37,7 @@ pub const dagger = Item{
     .minDamage = 1,
     .maxDamage = 3,
     .magic = 1,
+    .price = 15,
 };
 
 pub const shortBow = Item{
@@ -30,6 +46,7 @@ pub const shortBow = Item{
     .minDamage = 1,
     .maxDamage = 3,
     .dexterity = 1,
+    .price = 20,
 };
 
 pub const shortSword = Item{
@@ -38,6 +55,7 @@ pub const shortSword = Item{
     .minDamage = 2,
     .maxDamage = 4,
     .strength = 1,
+    .price = 18,
 };
 
 // offHand
@@ -45,18 +63,21 @@ pub const basicArrow = Item{
     .name = "Basic Arrow",
     .itemType = .offHand,
     .damage = 1,
+    .price = 2,
 };
 
 pub const buckler = Item{
     .name = "Buckler",
     .itemType = .offHand,
     .armor = 2,
+    .price = 12,
 };
 
 pub const smallBook = Item{
     .name = "Small Book",
     .itemType = .offHand,
     .magic = 1,
+    .price = 15,
 };
 
 // potions
@@ -64,34 +85,40 @@ pub const smallHealthPotion = Item{
     .name = "Small Health Potion",
     .itemType = .potion,
     .health = 40,
+    .price = 8,
 };
 
 pub const smallManaPotion = Item{
     .name = "Small Mana Potion",
     .itemType = .potion,
     .mana = 40,
+    .price = 8,
 };
 
 pub const strengthElixir = Item{
     .name = "Elixir Of Strength",
     .itemType = .potion,
     .strength = 1,
+    .price = 2500,
 };
 
 pub const dexerityElixir = Item{
     .name = "Elixir Of Dexterity",
     .itemType = .potion,
     .dexterity = 1,
+    .price = 2500,
 };
 
 pub const vitalityElixir = Item{
     .name = "Elixir Of Vitality",
     .itemType = .potion,
     .vitality = 1,
+    .price = 2500,
 };
 
 pub const magicElixir = Item{
     .name = "Elixir Of Magic",
     .itemType = .potion,
     .magic = 1,
+    .price = 2500,
 };
