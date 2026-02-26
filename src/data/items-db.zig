@@ -145,6 +145,53 @@ pub const amuletOfProtection = Item{
     .price = 40,
 };
 
+// Rings
+pub const ringOfStrength = Item{
+    .name = "Ring Of Strength",
+    .itemType = .ring,
+    .strength = 2,
+    .price = 70,
+};
+
+pub const ringOfDexterity = Item{
+    .name = "Ring Of Dexterity",
+    .itemType = .ring,
+    .dexterity = 2,
+    .hit = 3,
+    .price = 75,
+};
+
+pub const ringOfMagic = Item{
+    .name = "Ring Of Magic",
+    .itemType = .ring,
+    .magic = 2,
+    .mana = 15,
+    .price = 80,
+};
+
+pub const ringOfSorcery = Item{
+    .name = "Ring Of Sorcery",
+    .itemType = .ring,
+    .magic = 3,
+    .mana = 25,
+    .price = 120,
+};
+
+pub const ringOfLife = Item{
+    .name = "Ring Of Life",
+    .itemType = .ring,
+    .vitality = 2,
+    .health = 10,
+    .price = 65,
+};
+
+pub const ringOfProtection = Item{
+    .name = "Ring Of Protection",
+    .itemType = .ring,
+    .armor = 3,
+    .price = 60,
+};
+
 // potions
 pub const smallHealthPotion = Item{
     .name = "Small Health Potion",

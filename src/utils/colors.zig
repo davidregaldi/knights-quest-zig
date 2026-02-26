@@ -1,7 +1,4 @@
-pub const reset = "\x1b[0m";
-pub const bold = "\x1b[1m";
-pub const clear = "\x1b[2J\x1b[H";
-pub const underline = "\x1b[4m";
+// Colors and styles
 
 pub const black = "\x1b[30m";
 pub const red = "\x1b[31m";
@@ -20,3 +17,8 @@ pub const brightBlue = "\x1b[94m";
 pub const brightMagenta = "\x1b[95m";
 pub const brightCyan = "\x1b[96m";
 pub const brightWhite = "\x1b[97m";
+
+pub const reset = "\x1b[0m";
+pub const bold = "\x1b[1m";
+pub const clear = "\x1b[2J\x1b[H";
+pub const underline = "\x1b[4m";

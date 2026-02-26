@@ -1,5 +1,7 @@
 const std = @import("std");
-const cls = @import("../utils/colors.zig");
+const clr = @import("../utils/colors.zig");
+const csl = @import("../utils/stdout.zig");
+
 const Item = @import("item.zig").Item;
 const itemsDB = @import("../data/items-db.zig");
 
@@ -129,7 +131,7 @@ pub const Player = struct {
 
         player.updateStats();
         player.resetLifeAndMana();
-        std.debug.print("{s}{s}{s} entered the game.\nLevel {d} {s}\n", .{ cls.bold, player.name, cls.reset, player.level, @tagName(player.class) });
+        std.debug.print("{s}{s}{s} entered the game.\nLevel {d} {s}\n", .{ clr.bold, player.name, clr.reset, player.level, @tagName(player.class) });
         std.debug.print("-\n", .{});
         player.printPosition();
         player.printStats();
