@@ -8,8 +8,7 @@ pub const emptyOffHand = Item{ .name = "Empty", .itemType = .offHand };
 pub const emptyGloves = Item{ .name = "Empty", .itemType = .gloves };
 pub const emptyBelt = Item{ .name = "Empty", .itemType = .belt };
 pub const emptyBoots = Item{ .name = "Empty", .itemType = .boots };
-pub const emptyRingLeft = Item{ .name = "Empty", .itemType = .ringLeft };
-pub const emptyRingRight = Item{ .name = "Empty", .itemType = .ringRight };
+pub const emptyRing = Item{ .name = "Empty", .itemType = .ring };
 pub const emptyAmulet = Item{ .name = "Empty", .itemType = .amulet };
 pub const emptyItem = Item{ .name = "Empty", .itemType = .head }; // for inventory
 
@@ -112,6 +111,38 @@ pub const spiritBoots = Item{
     .magic = 1,
     .mana = 20,
     .price = 75,
+};
+
+// Amulets
+pub const amuletOfVigor = Item{
+    .name = "Amulet Of Vigor",
+    .itemType = .amulet,
+    .vitality = 2,
+    .health = 10,
+    .price = 50,
+};
+
+pub const amuletOfPrecision = Item{
+    .name = "Amulet Of Precision",
+    .itemType = .amulet,
+    .dexterity = 2,
+    .hit = 5,
+    .price = 55,
+};
+
+pub const amuletOfWisdom = Item{
+    .name = "Amulet Of Wisdom",
+    .itemType = .amulet,
+    .magic = 1,
+    .mana = 20,
+    .price = 60,
+};
+
+pub const amuletOfProtection = Item{
+    .name = "Amulet Of Protection",
+    .itemType = .amulet,
+    .armor = 3,
+    .price = 40,
 };
 
 // potions
